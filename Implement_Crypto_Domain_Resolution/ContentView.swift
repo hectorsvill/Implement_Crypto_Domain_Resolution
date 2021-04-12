@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var fullText: String = "Domain"
+    let resolutionController = ResolutionController()
+    @State private var fullText: String = ""
     @State private var domainError = ""
+    @State private var ownerAddress = ""
     
     var body: some View {
         NavigationView {
@@ -24,26 +26,77 @@ struct ContentView: View {
                     .padding(.leading, 30)
 //                    .offset(y: 13)
 
-                TextField("Enter Domain", text: $fullText)
+                TextField(
+                    "example.crypto or example.zil",
+                    text: $fullText,
+                    onEditingChanged: { isEditing in
+                        print(isEditing)
+                        if isEditing && !domainError.isEmpty {
+                            domainError = ""
+                            ownerAddress = ""
+                        }
+                    },
+                    onCommit: {
+                        fetchResolution(with: fullText) { ownerAddress, error in
+                            if let error = error  {
+                                print(error.localizedDescription)
+                                domainError = "This domain is not supported."
+                            }
+                            
+                            guard let ownerAddress = ownerAddress else {
+                                return
+                            }
+                            
+                            self.ownerAddress = ownerAddress
+                            
+                            domainError = "Owner Adress:"
+                        }
+                    }
+                            
+                    
+                    
+                    
+                )
                     .padding()
                     .foregroundColor(Color(UIColor.label))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.black, lineWidth: 4)
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color.black, lineWidth: 2)
                             .padding(.leading, 5)
                             .padding(.trailing, 5)
-                        
                     )
+                    
                 
-                Text(domainError)
-                    .padding(.top, 5)
-                    .padding(.leading, 30)
+                VStack(alignment: .leading) {
+                    Text(domainError)
+
+                        
+                    Text("\(ownerAddress)")
+                        .padding()
+                }
+                .padding(.top, 5)
+                .padding(.leading, 30)
+                .font(.caption2)
+                
     
                 Spacer()
             }
             
             .navigationBarTitle("Unstoppable Domains", displayMode: .inline)
         }// NavigationView
+    }
+    
+    func fetchResolution(with addressDomain: String, completion: @escaping (String?, Error?) -> ())  {
+        resolutionController.resolution.owner(domain: addressDomain) { result in
+            switch result {
+            case .success(let returnValue):
+                let domainOwner = returnValue
+                completion(domainOwner, nil)
+            case .failure(let error):
+                print("Expected owner but got error: \(error)")
+                completion(nil, error)
+            }
+        }
     }
 }
 
