@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,8 @@
 		AD49E0AC262381CB00F169B4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49E0AB262381CB00F169B4 /* ContentView.swift */; };
 		AD49E0AE262381CB00F169B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD49E0AD262381CB00F169B4 /* Assets.xcassets */; };
 		AD49E0B1262381CB00F169B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD49E0B0262381CB00F169B4 /* Preview Assets.xcassets */; };
+		AD49E0BC2623E38B00F169B4 /* UnstoppableDomainsResolution in Frameworks */ = {isa = PBXBuildFile; productRef = AD49E0BB2623E38B00F169B4 /* UnstoppableDomainsResolution */; };
+		AD49E0BF2623E3B000F169B4 /* ResolutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49E0BE2623E3B000F169B4 /* ResolutionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,7 @@
 		AD49E0AD262381CB00F169B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD49E0B0262381CB00F169B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AD49E0B2262381CB00F169B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD49E0BE2623E3B000F169B4 /* ResolutionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD49E0BC2623E38B00F169B4 /* UnstoppableDomainsResolution in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +58,7 @@
 			children = (
 				AD49E0A9262381CB00F169B4 /* Implement_Crypto_Domain_ResolutionApp.swift */,
 				AD49E0AB262381CB00F169B4 /* ContentView.swift */,
+				AD49E0BE2623E3B000F169B4 /* ResolutionController.swift */,
 				AD49E0AD262381CB00F169B4 /* Assets.xcassets */,
 				AD49E0B2262381CB00F169B4 /* Info.plist */,
 				AD49E0AF262381CB00F169B4 /* Preview Content */,
@@ -85,6 +90,9 @@
 			dependencies = (
 			);
 			name = Implement_Crypto_Domain_Resolution;
+			packageProductDependencies = (
+				AD49E0BB2623E38B00F169B4 /* UnstoppableDomainsResolution */,
+			);
 			productName = Implement_Crypto_Domain_Resolution;
 			productReference = AD49E0A6262381CB00F169B4 /* Implement_Crypto_Domain_Resolution.app */;
 			productType = "com.apple.product-type.application";
@@ -112,6 +120,9 @@
 				Base,
 			);
 			mainGroup = AD49E09D262381CB00F169B4;
+			packageReferences = (
+				AD49E0BA2623E38B00F169B4 /* XCRemoteSwiftPackageReference "resolution-swift" */,
+			);
 			productRefGroup = AD49E0A7262381CB00F169B4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -139,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD49E0AC262381CB00F169B4 /* ContentView.swift in Sources */,
+				AD49E0BF2623E3B000F169B4 /* ResolutionController.swift in Sources */,
 				AD49E0AA262381CB00F169B4 /* Implement_Crypto_Domain_ResolutionApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +340,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AD49E0BA2623E38B00F169B4 /* XCRemoteSwiftPackageReference "resolution-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/unstoppabledomains/resolution-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AD49E0BB2623E38B00F169B4 /* UnstoppableDomainsResolution */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD49E0BA2623E38B00F169B4 /* XCRemoteSwiftPackageReference "resolution-swift" */;
+			productName = UnstoppableDomainsResolution;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AD49E09E262381CB00F169B4 /* Project object */;
 }
