@@ -7,7 +7,14 @@
 
 import SwiftUI
 
+enum ResolutionState {
+    case domainResolving
+    case domainResolution
+    case domainError
+}
+
 struct ContentView: View {
+    let resolutionState: ResolutionState = .domainResolving
     let resolutionController = ResolutionController()
     @State private var fullText: String = ""
     @State private var domainError = ""
@@ -52,19 +59,15 @@ struct ContentView: View {
                             domainError = "Owner Adress:"
                         }
                     }
-                            
-                    
-                    
-                    
                 )
-                    .padding()
-                    .foregroundColor(Color(UIColor.label))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color.black, lineWidth: 2)
-                            .padding(.leading, 5)
-                            .padding(.trailing, 5)
-                    )
+                .padding()
+                .foregroundColor(Color(UIColor.label))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color.black, lineWidth: 2)
+                        .padding(.leading, 5)
+                        .padding(.trailing, 5)
+                )
                     
                 
                 VStack(alignment: .leading) {
