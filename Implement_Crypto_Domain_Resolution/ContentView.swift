@@ -7,14 +7,8 @@
 
 import SwiftUI
 
-enum ResolutionState {
-    case domainResolving
-    case domainResolution
-    case domainError
-}
 
 struct ContentView: View {
-    let resolutionState: ResolutionState = .domainResolving
     let resolutionController = ResolutionController()
     @State private var fullText: String = ""
     @State private var domainError = ""
@@ -59,7 +53,7 @@ struct ContentView: View {
                             domainError = "Owner Adress:"
                         }
                     }
-                )
+                )// TextField 
                 .padding()
                 .foregroundColor(Color(UIColor.label))
                 .overlay(
@@ -94,9 +88,11 @@ struct ContentView: View {
             switch result {
             case .success(let returnValue):
                 let domainOwner = returnValue
+                resolutionController.resolutionState = .domainResolution
                 completion(domainOwner, nil)
             case .failure(let error):
                 print("Expected owner but got error: \(error)")
+                resolutionController.resolutionState = .domainError
                 completion(nil, error)
             }
         }

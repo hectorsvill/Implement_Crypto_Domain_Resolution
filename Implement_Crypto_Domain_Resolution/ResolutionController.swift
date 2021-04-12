@@ -8,8 +8,16 @@
 import Foundation
 import UnstoppableDomainsResolution
 
+
+enum ResolutionState {
+    case domainResolving
+    case domainResolution
+    case domainError
+}
+
 class ResolutionController  {
     var resolution: Resolution! = nil
+    var resolutionState: ResolutionState = .domainResolving
     
     init() {
         if let res = try? Resolution() {
