@@ -14,3 +14,4 @@ struct Account {
     let btcAddress = ""
     let ethAddress = ""
 }
+

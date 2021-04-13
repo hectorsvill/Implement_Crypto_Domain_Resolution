@@ -17,7 +17,8 @@ enum ResolutionState {
 
 class ResolutionController  {
     var resolution: Resolution! = nil
-    var resolutionState: ResolutionState = .domainResolving
+    var state: ResolutionState = .domainResolving
+    var account: Account! = nil
     
     init() {
         if let res = try? Resolution() {
@@ -28,3 +29,5 @@ class ResolutionController  {
     }
     
 }
+
+

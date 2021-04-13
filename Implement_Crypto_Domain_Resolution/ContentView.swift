@@ -25,19 +25,15 @@ struct ContentView: View {
                     )// Text
                     .padding(.top, 10)
                     .padding(.leading, 30)
-//                    .offset(y: 13)
 
                 TextField(
                     "Enter an address or domain",
                     text: $textFieldInput,
-                    onEditingChanged: { isEditing in
-                        print(" is editing: \(isEditing)")
-                    },
                     onCommit: {
                         resolutionController.resolution.owner(domain: textFieldInput) { result in
                             switch result {
                             case .success(let addressValue):
-                                self.domainInfoText = "\(textFieldInput) resisolved to\n\(addressValue)"
+                                self.domainInfoText = "\(textFieldInput) resolved to\n\(addressValue)"
                                 resolutionController.account = Account(domain: textFieldInput, address: addressValue)
                                 resolutionController.state = .domainResolution
                             case .failure:
@@ -68,6 +64,19 @@ struct ContentView: View {
             } // Vstack
             
             .navigationBarTitle("Unstoppable Domains", displayMode: .inline)
+            .toolbar {
+                Button(action: {
+                    print("remove current accoount.")
+                    resolutionController.account = nil
+                    textFieldInput.removeAll()
+                    domainInfoText.removeAll()
+                    resolutionController.state = .domainResolving
+                }, label: {
+                    Image(systemName: "trash")
+                })
+                .disabled(resolutionController.state != .domainResolution)
+            }
+         
         }// NavigationView
     }
     
