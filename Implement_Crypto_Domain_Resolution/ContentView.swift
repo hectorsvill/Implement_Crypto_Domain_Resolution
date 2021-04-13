@@ -10,92 +10,69 @@ import SwiftUI
 
 struct ContentView: View {
     let resolutionController = ResolutionController()
-    @State private var fullText: String = ""
-    @State private var domainError = ""
-    @State private var ownerAddress = ""
+    @State private var textFieldInput = ""
+    @State private var domainInfoText = ""
     
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
                 Text("Address or Domain")
+                    .foregroundColor(errorForegroundColor())
                     .font(.caption)
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
                             .stroke(Color(UIColor.white), lineWidth: 1)
-                    )
+                    )// Text
                     .padding(.top, 10)
                     .padding(.leading, 30)
 //                    .offset(y: 13)
 
                 TextField(
-                    "example.crypto or example.zil",
-                    text: $fullText,
+                    "Enter an address or domain",
+                    text: $textFieldInput,
                     onEditingChanged: { isEditing in
-                        print(isEditing)
-                        if isEditing && !domainError.isEmpty {
-                            domainError = ""
-                            ownerAddress = ""
-                        }
+                        print(" is editing: \(isEditing)")
                     },
                     onCommit: {
-                        fetchResolution(with: fullText) { ownerAddress, error in
-                            if let error = error  {
-                                print(error.localizedDescription)
-                                domainError = "This domain is not supported."
+                        resolutionController.resolution.owner(domain: textFieldInput) { result in
+                            switch result {
+                            case .success(let addressValue):
+                                self.domainInfoText = "\(textFieldInput) resisolved to\n\(addressValue)"
+                                resolutionController.account = Account(domain: textFieldInput, address: addressValue)
+                                resolutionController.state = .domainResolution
+                            case .failure:
+                                self.domainInfoText = "There are no records for \(textFieldInput)"
+                                resolutionController.state = .domainError
                             }
-                            
-                            guard let ownerAddress = ownerAddress else {
-                                return
-                            }
-                            
-                            self.ownerAddress = ownerAddress
-                            
-                            domainError = "Owner Adress:"
                         }
                     }
-                )// TextField 
+                )// TextFieldd
+                .disabled(resolutionController.state == .domainResolution)
+                .disableAutocorrection(true)
                 .padding()
                 .foregroundColor(Color(UIColor.label))
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.black, lineWidth: 2)
+                        .stroke(errorForegroundColor(), lineWidth: 2)
                         .padding(.leading, 5)
                         .padding(.trailing, 5)
                 )
-                    
                 
-                VStack(alignment: .leading) {
-                    Text(domainError)
-
-                        
-                    Text("\(ownerAddress)")
-                        .padding()
-                }
-                .padding(.top, 5)
-                .padding(.leading, 30)
-                .font(.caption2)
-                
+                Text(domainInfoText)
+                    .foregroundColor(errorForegroundColor())
+                    .padding(.top, 5)
+                    .padding(.leading, 30)
+                    .font(.caption2)
     
                 Spacer()
-            }
+            } // Vstack
             
             .navigationBarTitle("Unstoppable Domains", displayMode: .inline)
         }// NavigationView
     }
     
-    func fetchResolution(with addressDomain: String, completion: @escaping (String?, Error?) -> ())  {
-        resolutionController.resolution.owner(domain: addressDomain) { result in
-            switch result {
-            case .success(let returnValue):
-                let domainOwner = returnValue
-                resolutionController.resolutionState = .domainResolution
-                completion(domainOwner, nil)
-            case .failure(let error):
-                print("Expected owner but got error: \(error)")
-                resolutionController.resolutionState = .domainError
-                completion(nil, error)
-            }
-        }
+    func errorForegroundColor() -> Color {
+        resolutionController.state == .domainError ? Color.red : Color(UIColor.label)
     }
 }
 
