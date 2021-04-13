@@ -13,6 +13,7 @@
 		AD49E0B1262381CB00F169B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD49E0B0262381CB00F169B4 /* Preview Assets.xcassets */; };
 		AD49E0BC2623E38B00F169B4 /* UnstoppableDomainsResolution in Frameworks */ = {isa = PBXBuildFile; productRef = AD49E0BB2623E38B00F169B4 /* UnstoppableDomainsResolution */; };
 		AD49E0BF2623E3B000F169B4 /* ResolutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49E0BE2623E3B000F169B4 /* ResolutionController.swift */; };
+		AD49E0C626251D8200F169B4 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49E0C526251D8200F169B4 /* Account.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		AD49E0B0262381CB00F169B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AD49E0B2262381CB00F169B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD49E0BE2623E3B000F169B4 /* ResolutionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResolutionController.swift; sourceTree = "<group>"; };
+		AD49E0C526251D8200F169B4 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				AD49E0AD262381CB00F169B4 /* Assets.xcassets */,
 				AD49E0B2262381CB00F169B4 /* Info.plist */,
 				AD49E0AF262381CB00F169B4 /* Preview Content */,
+				AD49E0C526251D8200F169B4 /* Account.swift */,
 			);
 			path = Implement_Crypto_Domain_Resolution;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD49E0AC262381CB00F169B4 /* ContentView.swift in Sources */,
+				AD49E0C626251D8200F169B4 /* Account.swift in Sources */,
 				AD49E0BF2623E3B000F169B4 /* ResolutionController.swift in Sources */,
 				AD49E0AA262381CB00F169B4 /* Implement_Crypto_Domain_ResolutionApp.swift in Sources */,
 			);
